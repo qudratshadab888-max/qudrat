@@ -1,10 +1,7 @@
 <template>
 
   <div>
-
-    <h1>
-      قدرت الله شاداب
-    </h1>
+    <NuxtPage/>
 
   </div>
 
