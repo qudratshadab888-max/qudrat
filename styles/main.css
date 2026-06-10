@@ -1,1 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
 @import "tailwindcss";
+
+* {
+  @apply box-border;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+[dir="rtl"] {
+  @apply text-right;
+  direction: rtl;
+}
+
+[dir="ltr"] {
+  @apply text-left;
+  direction: ltr;
+}
+
+/* Dari/Farsi specific typography */
+.text-farsi {
+  font-family: "Vazirmatn", sans-serif;
+}

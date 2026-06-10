@@ -1,71 +1,174 @@
 <template>
-    <div>
-        <Header></Header>
+  <div>
+    <!-- Hero Section -->
+    <HeroSection
+      :title="heroContent[locale].title"
+      :subtitle="heroContent[locale].subtitle"
+      :description="heroContent[locale].description"
+      :image="heroContent[locale].image"
+      :buttons="heroContent[locale].buttons"
+    />
 
-        <!-- Hero Section -->
-        <section class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center overflow-hidden relative">
-            <!-- Background accent -->
-            <div class="absolute top-20 right-10 w-72 h-72 bg-yellow-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
-            <div class="absolute -bottom-8 left-20 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+    <!-- Statistics Section -->
+    <section class="bg-primary-900/5 py-20">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <h3 class="text-4xl md:text-5xl font-black text-accent">50+</h3>
+            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Artworks" : "آثار هنری" }}</p>
+          </div>
+          <div>
+            <h3 class="text-4xl md:text-5xl font-black text-accent">30+</h3>
+            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Poetry Recitations" : "دکلمه شعر" }}</p>
+          </div>
+          <div>
+            <h3 class="text-4xl md:text-5xl font-black text-accent">20+</h3>
+            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Cultural Activities" : "فعالیت فرهنگی" }}</p>
+          </div>
+          <div>
+            <h3 class="text-4xl md:text-5xl font-black text-accent">100+</h3>
+            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Articles & Writings" : "مقالات و نوشته‌ها" }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="max-w-7xl mx-auto px-5 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
-                <!-- Left Content -->
-                <div class="space-y-8 text-white">
-                    <div class="space-y-4">
-                        <span class="inline-block text-yellow-500 font-semibold text-sm tracking-widest uppercase">Welcome to My Portfolio</span>
-                        <h1 class="text-5xl md:text-7xl font-black leading-tight">
-                            Qudratullah<br><span class="text-yellow-500">Shadab</span>
-                        </h1>
-                        <p class="text-xl text-gray-300 max-w-lg">
-                            Artist • Painter • Cultural Activist
-                        </p>
-                    </div>
+    <!-- About Preview -->
+    <section class="py-24">
+      <div class="max-w-5xl mx-auto px-6">
+        <SectionTitle
+          :title="locale === 'en' ? 'About Me' : 'درباره من'"
+          :description="aboutContent[locale].bio"
+        />
+      </div>
+    </section>
 
-                    <p class="text-lg text-gray-400 leading-relaxed max-w-lg">
-                        Exploring the boundaries of contemporary art through diverse mediums. My work reflects cultural heritage, social consciousness, and the beauty of human expression.
-                    </p>
+    <!-- Activities Preview -->
+    <section class="py-24 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <SectionTitle :title="locale === 'en' ? 'Featured Activities' : 'فعالیت‌های برجسته'" />
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          <ActivityCard
+            v-for="activity in activities.slice(0, 3)"
+            :key="activity.id"
+            :title="activity.title[locale]"
+            :description="activity.description[locale]"
+            :image="activity.image"
+            :category="locale === 'en' ? activity.category : (activity.category === 'social' ? 'اجتماعی' : 'فرهنگی')"
+            :date="activity.date"
+          />
+        </div>
+        <div class="flex justify-center mt-12">
+          <NuxtLink to="/social" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
+            {{ locale === "en" ? "View All Activities" : "دیدن تمام فعالیت‌ها" }}
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
 
-                    <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <NuxtLink
-                            to="/gallery"
-                            class="px-8 py-3 bg-yellow-600 hover:bg-yellow-700 text-white font-bold rounded-lg transition transform hover:scale-105"
-                        >
-                            View Gallery
-                        </NuxtLink>
-                        <NuxtLink
-                            to="/contact"
-                            class="px-8 py-3 border-2 border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-white font-bold rounded-lg transition"
-                        >
-                            Get in Touch
-                        </NuxtLink>
-                    </div>
-                </div>
+    <!-- Paintings Preview -->
+    <section class="py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <SectionTitle :title="locale === 'en' ? 'My Paintings' : 'نقاشی‌های من'" />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+          <PaintingCard
+            v-for="painting in paintings.slice(0, 4)"
+            :key="painting.id"
+            :image="painting.image"
+            :title="painting.title[locale]"
+            :date="painting.date"
+            :description="painting.description[locale]"
+            @click="selectedPainting = painting"
+          />
+        </div>
+        <div class="flex justify-center mt-12">
+          <NuxtLink to="/paintings" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
+            {{ locale === "en" ? "View Gallery" : "دیدن گالری" }}
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
 
-                <!-- Right Image -->
-                <div class="relative h-96 md:h-full flex items-center justify-center">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-lg"></div>
-                    <img
-                        src="/images/images (13).jpg"
-                        alt="Qudratullah Shadab"
-                        class="w-full h-96 md:h-screen object-cover rounded-lg shadow-2xl"
-                    >
-                </div>
-            </div>
+    <!-- Poetry Preview -->
+    <section class="py-24 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <SectionTitle :title="locale === 'en' ? 'Poetry Recitations' : 'دکلمه‌های شعر'" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+          <PoetryCard
+            v-for="poem in poems.slice(0, 2)"
+            :key="poem.id"
+            :title="poem.title[locale]"
+            :text="poem.text"
+            :translation="poem.translation"
+            :audio-url="poem.audioUrl"
+            :video-url="poem.videoUrl"
+            :date="poem.date"
+          />
+        </div>
+        <div class="flex justify-center mt-12">
+          <NuxtLink to="/poetry-recitation" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
+            {{ locale === "en" ? "View All Poems" : "دیدن تمام اشعار" }}
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-                <div class="w-6 h-10 border-2 border-yellow-600 rounded-full flex items-center justify-center">
-                    <div class="w-1 h-2 bg-yellow-600 rounded-full animate-pulse"></div>
-                </div>
-            </div>
-        </section>
+    <!-- Articles Preview -->
+    <section class="py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <SectionTitle :title="locale === 'en' ? 'Latest Articles' : 'آخرین مقالات'" />
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          <ArticleCard
+            v-for="article in articles.slice(0, 3)"
+            :key="article.id"
+            :title="article.title[locale]"
+            :summary="article.summary[locale]"
+            :cover="article.cover"
+            :date="article.date"
+            :link="`/article-${article.id}`"
+          />
+        </div>
+        <div class="flex justify-center mt-12">
+          <NuxtLink to="/articles" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
+            {{ locale === "en" ? "View All Articles" : "دیدن تمام مقالات" }}
+          </NuxtLink>
+        </div>
+      </div>
+    </section>
 
-        <Footer></Footer>
-    </div>
+    <!-- Contact CTA -->
+    <section class="py-24 bg-gradient-to-br from-primary-900 to-primary-900/80">
+      <div class="max-w-5xl mx-auto px-6 text-center">
+        <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
+          {{ locale === "en" ? "Let's Collaborate" : "بیایید همکاری کنیم" }}
+        </h2>
+        <p class="text-xl text-gray-200 mb-8">
+          {{ locale === "en" ? "Have a project in mind? Let's create something amazing together." : "پروژه‌ای در ذهن دارید؟ بیایید چیزی شگفت‌انگیز با هم بسازیم." }}
+        </p>
+        <NuxtLink to="/contact" class="inline-block px-10 py-4 bg-accent text-primary-900 rounded-xl font-bold text-lg hover:opacity-90 transition">
+          {{ locale === "en" ? "Get in Touch" : "تماس با من" }}
+        </NuxtLink>
+      </div>
+    </section>
+  </div>
 </template>
 
-<script setup>
-import Header from '~/components/header.vue'
-import Footer from '~/components/footer.vue'
+<script setup lang="ts">
+import { heroContent } from "~/data/hero"
+import { aboutContent } from "~/data/about"
+import { activities } from "~/data/activities"
+import { paintings } from "~/data/paintings"
+import { poems } from "~/data/poetry"
+import { articles } from "~/data/articles"
+
+const { locale } = useLanguage()
+
+usePageMeta(
+  locale.value === "en" ? "Qudratullah Shadab - Artist & Cultural Activist" : "قدرت الله شاداب - هنرمند و فعال فرهنگی",
+  locale.value === "en"
+    ? "Explore contemporary art, poetry, cultural initiatives, and social activism by Qudratullah Shadab"
+    : "آثار هنری معاصر، شعر، ابتکارات فرهنگی و فعالیت‌های اجتماعی قدرت الله شاداب"
+)
+
+const selectedPainting = ref(null)
 </script>
