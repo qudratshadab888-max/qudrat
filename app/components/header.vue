@@ -1,27 +1,30 @@
 <template>
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <header :class="[
+    'sticky top-0 z-50 border-b border-gray-200 transition-all duration-300',
+    scrolled ? 'bg-white/98 py-3 shadow-lg backdrop-blur-lg' : 'bg-white/95 py-4 shadow-sm backdrop-blur-md'
+  ]">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
       <!-- Logo & Brand -->
       <NuxtLink to="/" class="flex items-center gap-3 hover:opacity-80 transition">
         <div class="w-12 h-12 rounded-lg bg-primary-900 text-white flex items-center justify-center font-bold text-lg">QSH</div>
         <div>
-          <h1 class="font-bold text-primary-900 text-lg leading-tight">
-            {{ locale === "en" ? "Qudratullah Shadab" : "قدرت الله شاداب" }}
+          <h1 class="text-lg font-bold leading-tight text-primary-900">
+            {{ t("footer.brand") }}
           </h1>
-          <p class="text-xs text-gray-500">{{ locale === "en" ? "Artist & Activist" : "هنرمند و فعال" }}</p>
+          <p class="text-xs text-gray-500">{{ t("header.role") }}</p>
         </div>
       </NuxtLink>
 
       <!-- Desktop Navigation -->
       <nav class="hidden lg:flex items-center gap-1">
         <NuxtLink
-          v-for="(route, key) in navRoutes"
-          :key="key"
+          v-for="route in routes"
+          :key="route.path"
           :to="route.path"
           class="px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-900 hover:bg-primary-50 rounded-lg transition"
           active-class="text-primary-900 bg-primary-50"
         >
-          {{ locale === "en" ? route.en : route.fa }}
+          {{ t(`nav.${route.key}`) }}
         </NuxtLink>
       </nav>
 
@@ -31,7 +34,7 @@
           @click="toggleLanguage"
           class="px-3 py-2 text-sm font-semibold text-white bg-primary-900 hover:bg-opacity-90 rounded-lg transition"
         >
-          {{ locale === "en" ? "فارسی" : "English" }}
+          {{ t("header.toggleLang") }}
         </button>
 
         <!-- Mobile Menu Button -->
@@ -67,13 +70,13 @@
       <nav v-if="mobileMenuOpen" class="lg:hidden border-t border-gray-200 bg-white">
         <div class="px-6 py-4 space-y-2">
           <NuxtLink
-            v-for="(route, key) in navRoutes"
-            :key="key"
+            v-for="route in routes"
+            :key="route.path"
             :to="route.path"
             @click="mobileMenuOpen = false"
             class="block px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary-900 hover:bg-primary-50 rounded-lg transition"
           >
-            {{ locale === "en" ? route.en : route.fa }}
+            {{ t(`nav.${route.key}`) }}
           </NuxtLink>
         </div>
       </nav>
@@ -82,17 +85,20 @@
 </template>
 
 <script setup lang="ts">
-const { locale, toggleLanguage } = useLanguage()
+const { t, toggleLanguage } = useLanguage()
+const { routes } = useNavigation()
 const mobileMenuOpen = ref(false)
+const scrolled = ref(false)
 
-const navRoutes = [
-  { path: "/", en: "Home", fa: "خانه" },
-  { path: "/about", en: "About", fa: "درباره من" },
-  { path: "/social", en: "Social", fa: "اجتماعی" },
-  { path: "/cultural", en: "Cultural", fa: "فرهنگی" },
-  { path: "/paintings", en: "Paintings", fa: "نقاشی‌ها" },
-  { path: "/poetry-recitation", en: "Poetry", fa: "شعر" },
-  { path: "/articles", en: "Articles", fa: "مقالات" },
-  { path: "/contact", en: "Contact", fa: "تماس" },
-]
+const handleScroll = () => {
+  scrolled.value = window.scrollY > 10
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>

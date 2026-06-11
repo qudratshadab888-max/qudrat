@@ -16,4 +16,14 @@ export default defineNuxtConfig({
     ],
   },
 
+  // SEO Configuration
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+      charset: 'utf-8',
+    },
+  },
+
 })

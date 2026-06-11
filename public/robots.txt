@@ -1,2 +1,7 @@
-User-Agent: *
-Disallow:
+User-agent: *
+Allow: /
+Disallow: /.nuxt/
+Disallow: /node_modules/
+Disallow: /.output/
+
+Sitemap: https://qudratullah.com/sitemap.xml

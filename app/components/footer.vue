@@ -1,34 +1,33 @@
 <template>
-  <footer class="bg-primary-900 text-gray-200 border-t border-gray-800 mt-20">
+  <footer class="mt-20 border-t border-gray-800 bg-primary-900 text-gray-200">
     <div class="max-w-7xl mx-auto px-6 py-12 md:py-16">
       <!-- Main Footer Content -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
         <!-- Brand Section -->
-        <div class="space-y-4">
+        <div class="space-y-4 md:col-span-2">
           <h3 class="text-white font-bold text-lg">
-            {{ locale === "en" ? "Qudratullah Shadab" : "قدرت الله شاداب" }}
+            {{ t("footer.brand") }}
           </h3>
-          <p class="text-sm text-gray-400">
-            {{
-              locale === "en"
-                ? "Artist, Painter & Cultural Activist exploring contemporary art and cultural expression."
-                : "هنرمند، نقاش و فعال فرهنگی در کاوش هنر معاصر و بیان فرهنگی."
-            }}
+          <p class="max-w-xl text-sm leading-6 text-gray-400">
+            {{ t("footer.tagline") }}
+          </p>
+          <p class="max-w-xl text-sm leading-6 text-gray-400">
+            {{ t("footer.availability") }}
           </p>
         </div>
 
         <!-- Quick Links -->
         <div>
           <h4 class="text-white font-semibold mb-4">
-            {{ locale === "en" ? "Navigation" : "ناوبری" }}
+            {{ t("footer.quicklinks") }}
           </h4>
           <ul class="space-y-2">
-            <li v-for="route in navRoutes" :key="route.path">
+            <li v-for="route in routes" :key="route.path">
               <NuxtLink
                 :to="route.path"
                 class="text-gray-400 hover:text-accent transition font-medium text-sm"
               >
-                {{ locale === "en" ? route.en : route.fa }}
+                {{ t(`nav.${route.key}`) }}
               </NuxtLink>
             </li>
           </ul>
@@ -37,34 +36,32 @@
         <!-- Contact Info -->
         <div>
           <h4 class="text-white font-semibold mb-4">
-            {{ locale === "en" ? "Contact" : "تماس" }}
+            {{ t("footer.contact") }}
           </h4>
           <ul class="space-y-2 text-sm">
             <li>
               <a
-                href="mailto:info@qudratullah.com"
+                :href="`mailto:${contactInfo.email}`"
                 class="text-gray-400 hover:text-accent transition"
               >
-                info@qudratullah.com
+                {{ contactInfo.email }}
               </a>
             </li>
             <li>
               <a href="tel:+919876543210" class="text-gray-400 hover:text-accent transition">
-                +91 (98) 765-43210
+                {{ contactInfo.phone }}
               </a>
             </li>
-            <li class="text-gray-400">India</li>
+            <li class="text-gray-400">{{ t("footer.location") }}</li>
           </ul>
-        </div>
-
-        <!-- Social Media -->
-        <div>
-          <h4 class="text-white font-semibold mb-4">{{ locale === "en" ? "Follow" : "دنبال کنید" }}</h4>
-          <div class="flex gap-4">
+          <h4 class="mb-4 mt-8 font-semibold text-white">{{ t("footer.follow") }}</h4>
+          <div class="flex gap-3">
             <a
-              href="#"
+              :href="contactInfo.socialLinks.instagram"
+              target="_blank"
+              rel="noopener noreferrer"
               class="w-10 h-10 bg-gray-800 hover:bg-accent rounded-full flex items-center justify-center text-white transition"
-              :aria-label="locale === 'en' ? 'Instagram' : 'اینستاگرام'"
+              aria-label="Instagram"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -73,9 +70,11 @@
               </svg>
             </a>
             <a
-              href="#"
+              :href="contactInfo.socialLinks.facebook"
+              target="_blank"
+              rel="noopener noreferrer"
               class="w-10 h-10 bg-gray-800 hover:bg-accent rounded-full flex items-center justify-center text-white transition"
-              :aria-label="locale === 'en' ? 'Facebook' : 'فیس‌بوک'"
+              aria-label="Facebook"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -84,9 +83,11 @@
               </svg>
             </a>
             <a
-              href="#"
+              :href="contactInfo.socialLinks.youtube"
+              target="_blank"
+              rel="noopener noreferrer"
               class="w-10 h-10 bg-gray-800 hover:bg-accent rounded-full flex items-center justify-center text-white transition"
-              :aria-label="locale === 'en' ? 'YouTube' : 'یوتیوب'"
+              aria-label="YouTube"
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path
@@ -103,20 +104,8 @@
         <!-- Bottom Footer -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
           <p class="text-sm text-gray-500">
-            {{
-              locale === "en"
-                ? "© 2026 Qudratullah Shadab. All rights reserved."
-                : "© ۱۴۰۵ قدرت الله شاداب. تمام حقوق محفوظ است."
-            }}
+            {{ t("footer.copyright") }}
           </p>
-          <div class="flex gap-6">
-            <a href="#" class="text-sm text-gray-500 hover:text-accent transition">
-              {{ locale === "en" ? "Privacy Policy" : "سیاست حریم خصوصی" }}
-            </a>
-            <a href="#" class="text-sm text-gray-500 hover:text-accent transition">
-              {{ locale === "en" ? "Terms of Service" : "شرایط خدمات" }}
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -124,17 +113,8 @@
 </template>
 
 <script setup lang="ts">
-const { locale } = useLanguage()
+import { contactInfo } from "~/data/contact"
 
-const navRoutes = [
-  { path: "/", en: "Home", fa: "خانه" },
-  { path: "/about", en: "About", fa: "درباره من" },
-  { path: "/social", en: "Social", fa: "اجتماعی" },
-  { path: "/cultural", en: "Cultural", fa: "فرهنگی" },
-  { path: "/paintings", en: "Paintings", fa: "نقاشی‌ها" },
-  { path: "/poetry-recitation", en: "Poetry", fa: "شعر" },
-  { path: "/articles", en: "Articles", fa: "مقالات" },
-  { path: "/contact", en: "Contact", fa: "تماس" },
-]
+const { t } = useLanguage()
+const { routes } = useNavigation()
 </script>
-

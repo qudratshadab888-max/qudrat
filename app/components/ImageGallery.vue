@@ -85,13 +85,13 @@ interface ImageItem {
   description?: string
 }
 
-defineProps<{
+const props = defineProps<{
   items: ImageItem[]
 }>()
 
 const selectedIndex = ref<number | null>(null)
 
-const currentItem = computed(() => (selectedIndex.value !== null ? items[selectedIndex.value] : null))
+const currentItem = computed(() => (selectedIndex.value !== null ? props.items[selectedIndex.value] : null))
 
 const openLightbox = (idx: number) => {
   selectedIndex.value = idx
@@ -102,7 +102,7 @@ const closeLightbox = () => {
 }
 
 const nextImage = () => {
-  if (selectedIndex.value !== null && selectedIndex.value < items.length - 1) {
+  if (selectedIndex.value !== null && selectedIndex.value < props.items.length - 1) {
     selectedIndex.value++
   }
 }

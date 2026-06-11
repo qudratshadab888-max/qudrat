@@ -1,8 +1,15 @@
 <template>
-  <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1 group">
+  <div class="group overflow-hidden rounded-lg bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
     <!-- Cover Image -->
-    <div class="relative h-48 overflow-hidden bg-gray-200">
-      <img :src="cover" :alt="title" class="w-full h-full object-cover group-hover:scale-110 transition" />
+    <div class="relative h-48 overflow-hidden bg-primary-900/5">
+      <img
+        :src="cover"
+        :alt="title"
+        :class="[
+          'h-full w-full transition duration-500 group-hover:scale-105',
+          cover.includes('/images/logo.png') ? 'object-contain p-8' : 'object-cover',
+        ]"
+      />
     </div>
 
     <!-- Content -->

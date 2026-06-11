@@ -15,7 +15,6 @@ export const poems: Poem[] = [
     text: "در راه دل، رنگ‌های حقیقت پنهان است\nهر قدم روند، آینه‌ای از روح است\nتنهایی مثل ستاره، روشن و بلند\nدر شب تاریک، امید ما را پیوند",
     translation:
       "In the path of the heart, the colors of truth are hidden\nEach step of walking, a mirror of the soul\nSolitude like a star, bright and lofty\nIn the dark night, hope is our bond",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     date: "2025-11-05",
   },
   {
@@ -24,7 +23,6 @@ export const poems: Poem[] = [
     text: "وقت سفیر گذشته، فریاد می‌کشد\nهر لحظه‌ای زندگی است، که ما بدتر می‌کشم\nفراموشی نیست پایان، بلکه آغاز نو است\nدر خاطرات، روح ما باقی و جاودانی است",
     translation:
       "Time is the messenger of the past, crying out\nEach moment is life, which we live worse\nForgetfulness is not the end, but a new beginning\nIn memories, our soul remains eternal",
-    videoUrl: "https://www.youtube.com/watch?v=video-id",
     date: "2025-10-20",
   },
   {

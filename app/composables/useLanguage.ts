@@ -2,7 +2,6 @@ import { useI18n } from "vue-i18n"
 
 export const useLanguage = () => {
   const { locale, t } = useI18n()
-  const colorMode = useColorMode()
 
   const isRTL = computed(() => locale.value === "fa")
 

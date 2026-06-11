@@ -10,46 +10,46 @@ export interface Painting {
 export const paintings: Painting[] = [
   {
     id: 1,
-    title: { en: "Contemplation in Blue", fa: "تفکر در آبی" },
+    title: { en: "Blue Memory", fa: "خاطره آبی" },
     description: {
-      en: "A meditative exploration of solitude and introspection through layered blue tones.",
-      fa: "کاوش تأملی از تنهایی و خودآگاهی از طریق رنگ‌های آبی لایه‌ای.",
+      en: "Layered blues and quiet marks reflect the distance between remembered places and present life.",
+      fa: "لایه‌های آبی و نشانه‌های آرام، فاصله میان مکان‌های به‌یادمانده و زندگی امروز را بازتاب می‌دهد.",
     },
     date: "2025-10-15",
-    image: "https://picsum.photos/400/400?random=10",
+    image: "/images/logo.png",
     category: "contemporary",
   },
   {
     id: 2,
-    title: { en: "Cultural Fusion", fa: "ترکیب فرهنگی" },
+    title: { en: "Inherited Pattern", fa: "نقش به‌ارث‌رسیده" },
     description: {
-      en: "Blending traditional and modern artistic elements to create a dialogue between past and present.",
-      fa: "ترکیب عناصر هنری سنتی و مدرن برای ایجاد گفتگو میان گذشته و حال.",
+      en: "Traditional motifs are rearranged into a contemporary field of color, rhythm, and movement.",
+      fa: "نقش‌های سنتی در میدانی معاصر از رنگ، ریتم و حرکت بازچیده شده‌اند.",
     },
     date: "2025-09-22",
-    image: "https://picsum.photos/400/400?random=11",
+    image: "/images/logo.png",
     category: "fusion",
   },
   {
     id: 3,
-    title: { en: "Urban Landscape", fa: "منظره شهری" },
+    title: { en: "City After Rain", fa: "شهر پس از باران" },
     description: {
-      en: "Contemporary urban scenes exploring the intersection of human activity and natural elements.",
-      fa: "صحنه‌های شهری معاصر که تقاطع فعالیت انسانی و عناصر طبیعی را کاوش می‌کند.",
+      en: "A compact urban composition shaped by wet streets, reflected light, and the movement of daily life.",
+      fa: "ترکیبی شهری و فشرده که از کوچه‌های نمناک، نور بازتابیده و حرکت زندگی روزمره ساخته شده است.",
     },
     date: "2025-08-30",
-    image: "https://picsum.photos/400/400?random=12",
+    image: "/images/logo.png",
     category: "urban",
   },
   {
     id: 4,
-    title: { en: "Poetic Abstraction", fa: "انتزاع شاعرانه" },
+    title: { en: "Line of a Poem", fa: "مصراع یک شعر" },
     description: {
-      en: "Abstract work inspired by verses and emotional depth of poetry.",
-      fa: "اثر انتزاعی الهام‌گرفته از اشعار و عمق احساسی شعر.",
+      en: "A visual response to the cadence of Dari poetry, where line and color behave like spoken breath.",
+      fa: "پاسخی بصری به آهنگ شعر دری؛ جایی که خط و رنگ مانند نفسِ گفته‌شده رفتار می‌کنند.",
     },
     date: "2025-08-05",
-    image: "https://picsum.photos/400/400?random=13",
+    image: "/images/logo.png",
     category: "abstract",
   },
   {
@@ -60,7 +60,7 @@ export const paintings: Painting[] = [
       fa: "بازتعریف نقوش سنتی از طریق دیدگاه هنری معاصر.",
     },
     date: "2025-07-20",
-    image: "https://picsum.photos/400/400?random=14",
+    image: "/images/logo.png",
     category: "traditional",
   },
   {
@@ -71,7 +71,7 @@ export const paintings: Painting[] = [
       fa: "کاوش ارتباط و پیوند از طریق بیان هنری مینیمالیستی.",
     },
     date: "2025-07-10",
-    image: "https://picsum.photos/400/400?random=15",
+    image: "/images/logo.png",
     category: "minimalist",
   },
   {
@@ -82,7 +82,7 @@ export const paintings: Painting[] = [
       fa: "کاوش پویای هویت شخصی و فرهنگی از طریق انتخاب رنگ‌های جسورانه.",
     },
     date: "2025-06-15",
-    image: "https://picsum.photos/400/400?random=16",
+    image: "/images/logo.png",
     category: "expressive",
   },
   {
@@ -93,7 +93,7 @@ export const paintings: Painting[] = [
       fa: "ثبت لحظات ناپایدار تغییر و دگرگونی در قالب بصری.",
     },
     date: "2025-05-28",
-    image: "https://picsum.photos/400/400?random=17",
+    image: "/images/logo.png",
     category: "contemporary",
   },
 ]

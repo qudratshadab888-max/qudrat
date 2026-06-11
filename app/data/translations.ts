@@ -4,28 +4,61 @@ export const translations = {
     nav: {
       home: "Home",
       about: "About",
-      social: "Social",
-      cultural: "Cultural",
-      paintings: "Paintings",
+      social: "Social Work",
+      cultural: "Culture",
+      paintings: "Gallery",
       poetry: "Poetry",
-      articles: "Articles",
+      articles: "Writing",
       contact: "Contact",
     },
     // Header
     header: {
       language: "Language",
       toggleLang: "فارسی",
+      role: "Artist & Cultural Activist",
     },
     // Hero section
     hero: {
-      welcome: "Welcome to My Portfolio",
+      welcome: "Artist Portfolio",
       name: "Qudratullah",
       surname: "Shadab",
       title: "Artist • Painter • Cultural Activist",
       subtitle:
-        "Exploring art, culture, and social expression through painting, poetry, and writing.",
+        "A bilingual archive of painting, Dari poetry, cultural memory, and community work shaped by Afghan heritage and contemporary practice.",
       cta_gallery: "View Gallery",
       cta_contact: "Get in Touch",
+    },
+    home: {
+      aboutTitle: "Art Rooted in Memory and Community",
+      aboutDescription:
+        "Qudratullah Shadab works across painting, poetry recitation, essays, and cultural programming. His practice connects personal memory with public life, using visual art and language to preserve heritage, open dialogue, and support young creative voices.",
+      disciplinesTitle: "Creative Practice",
+      disciplinesDescription: "A focused view of the studio, the spoken word, and community-facing cultural work.",
+      activitiesTitle: "Recent Community Work",
+      paintingsTitle: "Selected Paintings",
+      poetryTitle: "Dari Poetry Recitations",
+      articlesTitle: "Latest Writing",
+      contactTitle: "Start a Conversation",
+      contactDescription: "For exhibitions, readings, workshops, and cultural collaborations, reach out with a short note.",
+      viewActivities: "View Activities",
+      viewGallery: "View Gallery",
+      viewPoems: "View Recitations",
+      viewArticles: "View Writing",
+      contactCta: "Get in Touch",
+      disciplines: {
+        painting: {
+          title: "Painting",
+          text: "Contemporary compositions exploring color, identity, memory, and place.",
+        },
+        poetry: {
+          title: "Poetry",
+          text: "Dari recitations that carry rhythm, reflection, and shared cultural language.",
+        },
+        culture: {
+          title: "Cultural Work",
+          text: "Workshops, exhibitions, and community projects centered on heritage and education.",
+        },
+      },
     },
     // Statistics
     stats: {
@@ -100,15 +133,14 @@ export const translations = {
     // Footer
     footer: {
       brand: "Qudratullah Shadab",
-      tagline: "Artist, Painter & Cultural Activist",
+      tagline: "Painting, poetry, and cultural work rooted in memory, language, and community.",
       quicklinks: "Quick Links",
       contact: "Contact",
       follow: "Follow",
       copyright: "© 2026 Qudratullah Shadab. All rights reserved.",
-      privacy: "Privacy Policy",
-      terms: "Terms of Service",
       phone: "+91 (234) 567-890",
       location: "India",
+      availability: "Available for exhibitions, poetry readings, workshops, and cultural collaborations.",
     },
     // Common
     common: {
@@ -124,28 +156,61 @@ export const translations = {
     nav: {
       home: "خانه",
       about: "درباره من",
-      social: "اجتماعی",
-      cultural: "فرهنگی",
-      paintings: "نقاشی",
+      social: "کار اجتماعی",
+      cultural: "فرهنگ",
+      paintings: "گالری",
       poetry: "شعر",
-      articles: "مقالات",
+      articles: "نوشته‌ها",
       contact: "تماس",
     },
     // Header
     header: {
       language: "زبان",
       toggleLang: "English",
+      role: "هنرمند و فعال فرهنگی",
     },
     // Hero section
     hero: {
-      welcome: "به پورتفولیوی من خوش آمدید",
+      welcome: "پورتفولیوی هنری",
       name: "قدرت الله",
       surname: "شاداب",
       title: "هنرمند • نقاش • فعال فرهنگی",
       subtitle:
-        "کاوش در هنر، فرهنگ و بیان اجتماعی از طریق نقاشی، شعر و نویسندگی.",
+        "آرشیف دوزبانه‌ای از نقاشی، شعر دری، حافظه فرهنگی و کار اجتماعی که از میراث افغانستان و هنر معاصر نیرو می‌گیرد.",
       cta_gallery: "دیدن گالری",
       cta_contact: "تماس با من",
+    },
+    home: {
+      aboutTitle: "هنری ریشه‌دار در خاطره و جامعه",
+      aboutDescription:
+        "قدرت الله شاداب در نقاشی، دکلمه شعر، مقاله‌نویسی و برنامه‌های فرهنگی کار می‌کند. کار او خاطره شخصی را با زندگی عمومی پیوند می‌دهد و از هنر و زبان برای پاسداری از میراث، گشودن گفتگو و حمایت از صداهای خلاق جوان استفاده می‌کند.",
+      disciplinesTitle: "حوزه‌های خلاقانه",
+      disciplinesDescription: "نگاهی فشرده به کارگاه نقاشی، کلام شاعرانه و فعالیت‌های فرهنگی رو به جامعه.",
+      activitiesTitle: "کارهای تازه اجتماعی",
+      paintingsTitle: "نقاشی‌های برگزیده",
+      poetryTitle: "دکلمه‌های شعر دری",
+      articlesTitle: "آخرین نوشته‌ها",
+      contactTitle: "گفتگو را آغاز کنید",
+      contactDescription: "برای نمایشگاه، دکلمه، کارگاه و همکاری فرهنگی، پیام کوتاهی بفرستید.",
+      viewActivities: "دیدن فعالیت‌ها",
+      viewGallery: "دیدن گالری",
+      viewPoems: "دیدن دکلمه‌ها",
+      viewArticles: "دیدن نوشته‌ها",
+      contactCta: "تماس با من",
+      disciplines: {
+        painting: {
+          title: "نقاشی",
+          text: "ترکیب‌های معاصر درباره رنگ، هویت، خاطره و مکان.",
+        },
+        poetry: {
+          title: "شعر",
+          text: "دکلمه‌های دری با ریتم، تأمل و زبان فرهنگی مشترک.",
+        },
+        culture: {
+          title: "کار فرهنگی",
+          text: "کارگاه‌ها، نمایشگاه‌ها و پروژه‌های جامعه‌محور برای میراث و آموزش.",
+        },
+      },
     },
     // Statistics
     stats: {
@@ -218,15 +283,14 @@ export const translations = {
     // Footer
     footer: {
       brand: "قدرت الله شاداب",
-      tagline: "هنرمند، نقاش و فعال فرهنگی",
+      tagline: "نقاشی، شعر و کار فرهنگی ریشه‌دار در خاطره، زبان و جامعه.",
       quicklinks: "لینک‌های سریع",
       contact: "تماس",
       follow: "دنبال کنید",
       copyright: "© ۱۴۰۵ قدرت الله شاداب. تمام حقوق محفوظ است.",
-      privacy: "سیاست حریم خصوصی",
-      terms: "شرایط خدمات",
       phone: "۹۱ (۲۳۴) ۵۶۷-۸۹۰+",
       location: "هند",
+      availability: "برای نمایشگاه، دکلمه شعر، کارگاه و همکاری فرهنگی آماده گفتگو است.",
     },
     // Common
     common: {

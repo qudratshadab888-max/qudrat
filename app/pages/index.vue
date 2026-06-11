@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Hero Section -->
     <HeroSection
       :title="heroContent[locale].title"
       :subtitle="heroContent[locale].subtitle"
@@ -9,68 +8,65 @@
       :buttons="heroContent[locale].buttons"
     />
 
-    <!-- Statistics Section -->
-    <section class="bg-primary-900/5 py-20">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div>
-            <h3 class="text-4xl md:text-5xl font-black text-accent">50+</h3>
-            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Artworks" : "آثار هنری" }}</p>
-          </div>
-          <div>
-            <h3 class="text-4xl md:text-5xl font-black text-accent">30+</h3>
-            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Poetry Recitations" : "دکلمه شعر" }}</p>
-          </div>
-          <div>
-            <h3 class="text-4xl md:text-5xl font-black text-accent">20+</h3>
-            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Cultural Activities" : "فعالیت فرهنگی" }}</p>
-          </div>
-          <div>
-            <h3 class="text-4xl md:text-5xl font-black text-accent">100+</h3>
-            <p class="mt-2 text-gray-600">{{ locale === "en" ? "Articles & Writings" : "مقالات و نوشته‌ها" }}</p>
+    <section class="bg-primary-900/5 py-12 md:py-16">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-6 text-center md:grid-cols-4">
+        <div v-for="stat in stats" :key="stat.label" class="rounded-lg bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md">
+          <h3 class="text-3xl font-black text-accent md:text-5xl">{{ stat.value }}</h3>
+          <p class="mt-2 text-sm font-medium text-gray-600 md:text-base">{{ stat.label }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 md:py-24">
+      <div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+        <div>
+          <SectionTitle
+            :title="t('home.aboutTitle')"
+            :description="t('home.aboutDescription')"
+          />
+        </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div
+            v-for="item in disciplines"
+            :key="item.title"
+            class="rounded-lg border border-primary-100 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-md"
+          >
+            <p class="mb-3 text-sm font-bold uppercase tracking-widest text-accent">{{ item.title }}</p>
+            <p class="text-sm leading-6 text-gray-700">{{ item.text }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- About Preview -->
-    <section class="py-24">
-      <div class="max-w-5xl mx-auto px-6">
+    <section class="bg-gray-50 py-20 md:py-24">
+      <div class="mx-auto max-w-7xl px-6">
         <SectionTitle
-          :title="locale === 'en' ? 'About Me' : 'درباره من'"
-          :description="aboutContent[locale].bio"
+          :title="t('home.activitiesTitle')"
+          :description="t('home.disciplinesDescription')"
         />
-      </div>
-    </section>
-
-    <!-- Activities Preview -->
-    <section class="py-24 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-6">
-        <SectionTitle :title="locale === 'en' ? 'Featured Activities' : 'فعالیت‌های برجسته'" />
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+        <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           <ActivityCard
             v-for="activity in activities.slice(0, 3)"
             :key="activity.id"
             :title="activity.title[locale]"
             :description="activity.description[locale]"
             :image="activity.image"
-            :category="locale === 'en' ? activity.category : (activity.category === 'social' ? 'اجتماعی' : 'فرهنگی')"
+            :category="activity.category === 'social' ? t('activities.social') : t('activities.cultural')"
             :date="activity.date"
           />
         </div>
-        <div class="flex justify-center mt-12">
-          <NuxtLink to="/social" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
-            {{ locale === "en" ? "View All Activities" : "دیدن تمام فعالیت‌ها" }}
+        <div class="mt-10 flex justify-center">
+          <NuxtLink to="/social" class="rounded-lg bg-primary-900 px-7 py-3.5 font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-primary-900">
+            {{ t("home.viewActivities") }}
           </NuxtLink>
         </div>
       </div>
     </section>
 
-    <!-- Paintings Preview -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-6">
-        <SectionTitle :title="locale === 'en' ? 'My Paintings' : 'نقاشی‌های من'" />
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+    <section class="py-20 md:py-24">
+      <div class="mx-auto max-w-7xl px-6">
+        <SectionTitle :title="t('home.paintingsTitle')" :description="t('paintings.description')" />
+        <div class="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <PaintingCard
             v-for="painting in paintings.slice(0, 4)"
             :key="painting.id"
@@ -78,22 +74,20 @@
             :title="painting.title[locale]"
             :date="painting.date"
             :description="painting.description[locale]"
-            @click="selectedPainting = painting"
           />
         </div>
-        <div class="flex justify-center mt-12">
-          <NuxtLink to="/paintings" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
-            {{ locale === "en" ? "View Gallery" : "دیدن گالری" }}
+        <div class="mt-10 flex justify-center">
+          <NuxtLink to="/paintings" class="rounded-lg bg-primary-900 px-7 py-3.5 font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-primary-900">
+            {{ t("home.viewGallery") }}
           </NuxtLink>
         </div>
       </div>
     </section>
 
-    <!-- Poetry Preview -->
-    <section class="py-24 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-6">
-        <SectionTitle :title="locale === 'en' ? 'Poetry Recitations' : 'دکلمه‌های شعر'" />
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+    <section class="bg-gray-50 py-20 md:py-24">
+      <div class="mx-auto max-w-7xl px-6">
+        <SectionTitle :title="t('home.poetryTitle')" :description="t('poetry.description')" />
+        <div class="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <PoetryCard
             v-for="poem in poems.slice(0, 2)"
             :key="poem.id"
@@ -105,19 +99,18 @@
             :date="poem.date"
           />
         </div>
-        <div class="flex justify-center mt-12">
-          <NuxtLink to="/poetry-recitation" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
-            {{ locale === "en" ? "View All Poems" : "دیدن تمام اشعار" }}
+        <div class="mt-10 flex justify-center">
+          <NuxtLink to="/poetry-recitation" class="rounded-lg bg-primary-900 px-7 py-3.5 font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-primary-900">
+            {{ t("home.viewPoems") }}
           </NuxtLink>
         </div>
       </div>
     </section>
 
-    <!-- Articles Preview -->
-    <section class="py-24">
-      <div class="max-w-7xl mx-auto px-6">
-        <SectionTitle :title="locale === 'en' ? 'Latest Articles' : 'آخرین مقالات'" />
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+    <section class="py-20 md:py-24">
+      <div class="mx-auto max-w-7xl px-6">
+        <SectionTitle :title="t('home.articlesTitle')" :description="t('articles.description')" />
+        <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           <ArticleCard
             v-for="article in articles.slice(0, 3)"
             :key="article.id"
@@ -128,25 +121,20 @@
             :link="`/article-${article.id}`"
           />
         </div>
-        <div class="flex justify-center mt-12">
-          <NuxtLink to="/articles" class="px-8 py-4 bg-primary-900 text-white rounded-xl font-semibold hover:opacity-90 transition">
-            {{ locale === "en" ? "View All Articles" : "دیدن تمام مقالات" }}
+        <div class="mt-10 flex justify-center">
+          <NuxtLink to="/articles" class="rounded-lg bg-primary-900 px-7 py-3.5 font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-primary-900">
+            {{ t("home.viewArticles") }}
           </NuxtLink>
         </div>
       </div>
     </section>
 
-    <!-- Contact CTA -->
-    <section class="py-24 bg-gradient-to-br from-primary-900 to-primary-900/80">
-      <div class="max-w-5xl mx-auto px-6 text-center">
-        <h2 class="text-4xl md:text-5xl font-black text-white mb-6">
-          {{ locale === "en" ? "Let's Collaborate" : "بیایید همکاری کنیم" }}
-        </h2>
-        <p class="text-xl text-gray-200 mb-8">
-          {{ locale === "en" ? "Have a project in mind? Let's create something amazing together." : "پروژه‌ای در ذهن دارید؟ بیایید چیزی شگفت‌انگیز با هم بسازیم." }}
-        </p>
-        <NuxtLink to="/contact" class="inline-block px-10 py-4 bg-accent text-primary-900 rounded-xl font-bold text-lg hover:opacity-90 transition">
-          {{ locale === "en" ? "Get in Touch" : "تماس با من" }}
+    <section class="bg-gradient-to-br from-primary-900 to-gray-950 py-20 md:py-24">
+      <div class="mx-auto max-w-4xl px-6 text-center">
+        <h2 class="text-3xl font-black text-white md:text-5xl">{{ t("home.contactTitle") }}</h2>
+        <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-200">{{ t("home.contactDescription") }}</p>
+        <NuxtLink to="/contact" class="mt-8 inline-flex rounded-lg bg-accent px-8 py-4 font-bold text-primary-900 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-white">
+          {{ t("home.contactCta") }}
         </NuxtLink>
       </div>
     </section>
@@ -155,20 +143,30 @@
 
 <script setup lang="ts">
 import { heroContent } from "~/data/hero"
-import { aboutContent } from "~/data/about"
 import { activities } from "~/data/activities"
 import { paintings } from "~/data/paintings"
 import { poems } from "~/data/poetry"
 import { articles } from "~/data/articles"
 
-const { locale } = useLanguage()
+const { locale, t } = useLanguage()
+
+const stats = computed(() => [
+  { value: t("stats.count_artworks"), label: t("stats.artworks") },
+  { value: t("stats.count_poems"), label: t("stats.poems") },
+  { value: t("stats.count_activities"), label: t("stats.activities") },
+  { value: t("stats.count_articles"), label: t("stats.articles") },
+])
+
+const disciplines = computed(() => [
+  { title: t("home.disciplines.painting.title"), text: t("home.disciplines.painting.text") },
+  { title: t("home.disciplines.poetry.title"), text: t("home.disciplines.poetry.text") },
+  { title: t("home.disciplines.culture.title"), text: t("home.disciplines.culture.text") },
+])
 
 usePageMeta(
   locale.value === "en" ? "Qudratullah Shadab - Artist & Cultural Activist" : "قدرت الله شاداب - هنرمند و فعال فرهنگی",
   locale.value === "en"
-    ? "Explore contemporary art, poetry, cultural initiatives, and social activism by Qudratullah Shadab"
-    : "آثار هنری معاصر، شعر، ابتکارات فرهنگی و فعالیت‌های اجتماعی قدرت الله شاداب"
+    ? "Explore painting, Dari poetry, cultural initiatives, and writing by Qudratullah Shadab"
+    : "نقاشی، شعر دری، ابتکارات فرهنگی و نوشته‌های قدرت الله شاداب"
 )
-
-const selectedPainting = ref(null)
 </script>

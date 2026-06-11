@@ -1,8 +1,15 @@
 <template>
-  <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 group">
+  <div class="group overflow-hidden rounded-lg bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
     <!-- Image -->
-    <div v-if="image" class="relative h-48 overflow-hidden bg-gray-200">
-      <img :src="image" :alt="title" class="w-full h-full object-cover group-hover:scale-110 transition" />
+    <div v-if="image" class="relative h-48 overflow-hidden bg-primary-900/5">
+      <img
+        :src="image"
+        :alt="title"
+        :class="[
+          'h-full w-full transition duration-500 group-hover:scale-105',
+          image.includes('/images/logo.png') ? 'object-contain p-8' : 'object-cover',
+        ]"
+      />
       <div v-if="category" class="absolute top-4 left-4">
         <span class="inline-block px-3 py-1 rounded-full bg-accent text-primary-900 text-xs font-semibold">
           {{ category }}
